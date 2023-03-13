@@ -9,7 +9,7 @@ import (
 )
 
 func TestInMemoryRepository(t *testing.T) {
-	repo := NewInMemoryRepository("data/accounts_test.json")
+	repo := NewInMemoryRepository("accounts_test.json")
 
 	// Test List function
 	t.Run("Test List function", func(t *testing.T) {

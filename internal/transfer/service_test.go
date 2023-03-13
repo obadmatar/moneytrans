@@ -8,7 +8,7 @@ import (
 )
 
 func TestTransfer(t *testing.T) {
-	r := account.NewInMemoryRepository("../account/data/accounts_test.json")
+	r := account.NewInMemoryRepository("../account/accounts_test.json")
 	s := Service{repo: r}
 
 	fromAccountId := "3d253e29-8785-464f-8fa0-9e4b57699db9" //  balance = 87.11
