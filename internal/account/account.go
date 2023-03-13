@@ -1,6 +1,10 @@
 package account
 
-import "github.com/shopspring/decimal"
+import (
+	"encoding/json"
+
+	"github.com/shopspring/decimal"
+)
 
 type Account struct {
 	id      string
@@ -28,4 +32,25 @@ func (acc *Account) Credit(amount decimal.Decimal) {
 // Debit subtracts the given amount from the account's balance.
 func (acc *Account) Debit(amount decimal.Decimal) {
 	acc.balance = acc.balance.Sub(amount)
+}
+
+// UnmarshalJSON implements json.Unmarshaler interface
+func (acc *Account) UnmarshalJSON(data []byte) error {
+	type accountJSON struct {
+		Id      string `json:"id"`
+		Name    string `json:"name"`
+		Balance string `json:"balance"`
+	}
+	var aux *accountJSON
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	balance, err := decimal.NewFromString(aux.Balance)
+	if err != nil {
+		return err
+	}
+	acc.id = aux.Id
+	acc.name = aux.Name
+	acc.balance = balance
+	return nil
 }
