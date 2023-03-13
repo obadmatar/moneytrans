@@ -2,13 +2,8 @@ package account
 
 import (
 	"encoding/json"
-	"errors"
 	"os"
 	"sync"
-)
-
-var (
-	ErrAccountNotFound = errors.New("account not found")
 )
 
 type Repositoy interface {
