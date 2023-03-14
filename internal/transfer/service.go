@@ -28,9 +28,9 @@ func NewService(configs...ServiceConfig) (*Service, error) {
 	return s, nil
 }
 
-func WithInMemoryAccountRepository(filepath string) ServiceConfig {
+func WithInMemoryAccountRepository(repo account.Repositoy) ServiceConfig {
 	return func(s *Service) error {
-		s.repo = account.NewInMemoryRepository(filepath)
+		s.repo = repo
 		return nil
 	}
 }

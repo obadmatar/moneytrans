@@ -34,6 +34,23 @@ func (acc *Account) Debit(amount decimal.Decimal) {
 	acc.balance = acc.balance.Sub(amount)
 }
 
+// MarshalJSON implements json.Marshaler interface
+func (acc Account) MarshalJSON() ([]byte, error) {
+    j, err := json.Marshal(struct {
+        Id      string `json:"id"`
+		Name    string `json:"name"`
+		Balance string `json:"balance"`
+    }{
+        Id: acc.id,
+		Name: acc.name,
+        Balance: acc.balance.String(),
+    })
+    if err != nil {
+           return nil, err
+    }
+    return j, nil
+}
+
 // UnmarshalJSON implements json.Unmarshaler interface
 func (acc *Account) UnmarshalJSON(data []byte) error {
 	type accountJSON struct {
