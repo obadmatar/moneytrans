@@ -51,7 +51,9 @@ func (r *inMemoryRepository) List() ([]*Account, error) {
 	accounts := make([]*Account, 0, len(r.accounts))
 
 	for _, acc := range r.accounts {
-		accounts = append(accounts, &acc)
+		newacc := Account{}
+		newacc = acc
+		accounts = append(accounts, &newacc)
 	}
 
 	return accounts, nil

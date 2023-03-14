@@ -42,3 +42,8 @@ func (s *server) methodNotAllowed(w http.ResponseWriter, r *http.Request) {
 	message := fmt.Sprintf("the %s method is not supported for this resource", r.Method)
 	s.errorResponse(w, r, http.StatusMethodNotAllowed, message)
 }
+
+// badRequestResponse sends 400 bad request status with error message
+func (s *server) badRequestResponse(w http.ResponseWriter, r *http.Request, err error) {
+	s.errorResponse(w, r, http.StatusBadRequest, err.Error())
+}
